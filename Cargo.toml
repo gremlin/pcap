@@ -26,7 +26,7 @@ libloading = "0.8"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 windows-sys = { version = "0.36.1", features = ["Win32_Foundation", "Win32_Networking_WinSock"] }
-once_cell = "1.19"
+once_cell = { version = "1.19", optional = true }
 
 [target.'cfg(not(target_os = "windows"))'.dependencies]
 # This really belongs in [dev-dependencies], but we can't have optional dev-deps
@@ -50,7 +50,7 @@ pkg-config = "0.3"
 capture-stream = ["tokio", "futures", "windows-sys/Win32_System_Threading"]
 tap-tests = ["tun-tap", "etherparse"]
 lending-iter = ["gat-std"]
-dynamic-load = []
+dynamic-load = ["once_cell"]
 # an empty feature to detect if '--all-features' was set
 all-features = []
 
