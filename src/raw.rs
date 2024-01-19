@@ -2,9 +2,10 @@
 
 use libc::{c_char, c_int, c_uchar, c_uint, FILE};
 
+#[cfg(windows)]
+use crate::raw_common::pcap_send_queue;
 use crate::raw_common::{
-    bpf_program, pcap_direction_t, pcap_dumper_t, pcap_if_t, pcap_pkthdr, pcap_send_queue,
-    pcap_stat, pcap_t,
+    bpf_program, pcap_direction_t, pcap_dumper_t, pcap_if_t, pcap_pkthdr, pcap_stat, pcap_t,
 };
 #[cfg(windows)]
 use windows_sys::Win32::Foundation::HANDLE;

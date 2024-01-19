@@ -1,14 +1,14 @@
 #![allow(dead_code)]
 
-use std::env;
 use crate::raw_common::{
     bpf_program, pcap_direction_t, pcap_dumper_t, pcap_if_t, pcap_pkthdr, pcap_send_queue,
     pcap_stat, pcap_t,
 };
 use libc::{c_char, c_int, c_uchar, c_uint, FILE};
 use libloading::Library;
-use std::path::PathBuf;
 use once_cell::sync::Lazy;
+use std::env;
+use std::path::PathBuf;
 use windows_sys::Win32::Foundation::HANDLE;
 
 type PcapCreate = unsafe extern "C" fn(arg1: *const c_char, arg2: *mut c_char) -> *mut pcap_t;
@@ -90,9 +90,7 @@ type PcapSendqueueQueue = unsafe extern "C" fn(
 type PcapSendqueueTransmit =
     unsafe extern "C" fn(p: *mut pcap_t, queue: *mut pcap_send_queue, sync: c_int) -> c_uint;
 
-static mut LIBRARY: Lazy<Library> = Lazy::new(|| {
-    unsafe { load_library() }
-});
+static mut LIBRARY: Lazy<Library> = Lazy::new(|| unsafe { load_library() });
 
 unsafe fn load_library() -> Library {
     let mut libfile = PathBuf::from("wpcap.dll");
@@ -141,11 +139,15 @@ pub unsafe fn pcap_open_dead(arg1: c_int, arg2: c_int) -> *mut pcap_t {
     func(arg1, arg2)
 }
 pub unsafe fn pcap_open_offline(arg1: *const c_char, arg2: *mut c_char) -> *mut pcap_t {
-    let func = LIBRARY.get::<PcapOpenOffline>(b"pcap_open_offline").unwrap();
+    let func = LIBRARY
+        .get::<PcapOpenOffline>(b"pcap_open_offline")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_fopen_offline(arg1: *mut FILE, arg2: *mut c_char) -> *mut pcap_t {
-    let func = LIBRARY.get::<PcapFopenOffline>(b"pcap_fopen_offline").unwrap();
+    let func = LIBRARY
+        .get::<PcapFopenOffline>(b"pcap_fopen_offline")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_close(arg1: *mut pcap_t) {
@@ -169,7 +171,9 @@ pub unsafe fn pcap_setfilter(arg1: *mut pcap_t, arg2: *mut bpf_program) -> c_int
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setdirection(arg1: *mut pcap_t, arg2: pcap_direction_t) -> c_int {
-    let func = LIBRARY.get::<PcapSetdirection>(b"pcap_setdirection").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetdirection>(b"pcap_setdirection")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setnonblock(arg1: *mut pcap_t, arg2: c_int, arg3: *mut c_char) -> c_int {
@@ -219,7 +223,9 @@ pub unsafe fn pcap_list_datalinks(arg1: *mut pcap_t, arg2: *mut *mut c_int) -> c
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_datalink(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetDatalink>(b"pcap_set_datalink").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetDatalink>(b"pcap_set_datalink")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_free_datalinks(arg1: *mut c_int) {
@@ -247,11 +253,15 @@ pub unsafe fn pcap_datalink_val_to_description(arg1: c_int) -> *const c_char {
     func(arg1)
 }
 pub unsafe fn pcap_major_version(arg1: *mut pcap_t) -> c_int {
-    let func = LIBRARY.get::<PcapMajorVersion>(b"pcap_major_version").unwrap();
+    let func = LIBRARY
+        .get::<PcapMajorVersion>(b"pcap_major_version")
+        .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_minor_version(arg1: *mut pcap_t) -> c_int {
-    let func = LIBRARY.get::<PcapMinorVersion>(b"pcap_minor_version").unwrap();
+    let func = LIBRARY
+        .get::<PcapMinorVersion>(b"pcap_minor_version")
+        .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_fileno(arg1: *mut pcap_t) -> c_int {
@@ -354,7 +364,9 @@ pub fn pcap_dump_open_append(arg1: *mut pcap_t, arg2: *const c_char) -> *mut pca
 }
 
 pub unsafe fn pcap_setmintocopy(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetmintocopy>(b"pcap_setmintocopy").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetmintocopy>(b"pcap_setmintocopy")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_getevent(p: *mut pcap_t) -> HANDLE {

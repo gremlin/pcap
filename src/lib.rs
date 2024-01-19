@@ -87,6 +87,7 @@ mod raw;
 mod raw_common;
 #[cfg(all(target_os = "windows", feature = "dynamic-load"))]
 use dynamic_win_raw as raw;
+#[cfg(windows)]
 pub mod sendqueue;
 #[cfg(feature = "capture-stream")]
 #[cfg_attr(windows, path = "stream_windows.rs")]
@@ -1193,7 +1194,7 @@ impl<T: Activated + ?Sized> Capture<T> {
     #[cfg(not(windows))]
     pub unsafe fn savefile_raw_fd(&self, fd: RawFd) -> Result<Savefile, Error> {
         open_raw_fd(fd, b'w').and_then(|file| {
-            let handle_opt = NonNull::<raw::pcap_dumper_t>::new(raw::pcap_dump_fopen(
+            let handle_opt = NonNull::<raw_common::pcap_dumper_t>::new(raw::pcap_dump_fopen(
                 self.handle.as_ptr(),
                 file,
             ));
@@ -1213,7 +1214,7 @@ impl<T: Activated + ?Sized> Capture<T> {
     #[cfg(libpcap_1_7_2)]
     pub fn savefile_append<P: AsRef<Path>>(&self, path: P) -> Result<Savefile, Error> {
         let name = CString::new(path.as_ref().to_str().unwrap())?;
-        let handle_opt = NonNull::<raw::pcap_dumper_t>::new(unsafe {
+        let handle_opt = NonNull::<raw_common::pcap_dumper_t>::new(unsafe {
             raw::pcap_dump_open_append(self.handle.as_ptr(), name.as_ptr())
         });
         let handle = self
@@ -1368,7 +1369,7 @@ impl Capture<Dead> {
             raw::pcap_open_dead_with_tstamp_precision(linktype.0, 65535, precision as u32)
         };
         Ok(Capture::from(
-            NonNull::<raw::pcap_t>::new(handle).ok_or(InsufficientMemory)?,
+            NonNull::<raw_common::pcap_t>::new(handle).ok_or(InsufficientMemory)?,
         ))
     }
 
