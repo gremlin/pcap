@@ -113,15 +113,21 @@ pub unsafe fn pcap_create(arg1: *const c_char, arg2: *mut c_char) -> *mut pcap_t
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_snaplen(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetSnaplen>(b"pcap_set_snaplen\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetSnaplen>(b"pcap_set_snaplen\0")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_promisc(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetPromisc>(b"pcap_set_promisc\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetPromisc>(b"pcap_set_promisc\0")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_timeout(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetTimeout>(b"pcap_set_timeout\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetTimeout>(b"pcap_set_timeout\0")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_buffer_size(arg1: *mut pcap_t, arg2: c_int) -> c_int {
@@ -177,7 +183,9 @@ pub unsafe fn pcap_setdirection(arg1: *mut pcap_t, arg2: pcap_direction_t) -> c_
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setnonblock(arg1: *mut pcap_t, arg2: c_int, arg3: *mut c_char) -> c_int {
-    let func = LIBRARY.get::<PcapSetnonblock>(b"pcap_setnonblock\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapSetnonblock>(b"pcap_setnonblock\0")
+        .unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_sendpacket(arg1: *mut pcap_t, arg2: *const c_uchar, arg3: c_int) -> c_int {
@@ -289,11 +297,15 @@ pub unsafe fn pcap_dump(arg1: *mut c_uchar, arg2: *const pcap_pkthdr, arg3: *con
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_findalldevs(arg1: *mut *mut pcap_if_t, arg2: *mut c_char) -> c_int {
-    let func = LIBRARY.get::<PcapFindalldevs>(b"pcap_findalldevs\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapFindalldevs>(b"pcap_findalldevs\0")
+        .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_freealldevs(arg1: *mut pcap_if_t) {
-    let func = LIBRARY.get::<PcapFreealldevs>(b"pcap_freealldevs\0").unwrap();
+    let func = LIBRARY
+        .get::<PcapFreealldevs>(b"pcap_freealldevs\0")
+        .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_get_selectable_fd(arg1: *mut pcap_t) -> c_int {
