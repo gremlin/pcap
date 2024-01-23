@@ -109,49 +109,49 @@ unsafe fn load_library() -> Library {
 }
 
 pub unsafe fn pcap_create(arg1: *const c_char, arg2: *mut c_char) -> *mut pcap_t {
-    let func = LIBRARY.get::<PcapCreate>(b"pcap_create").unwrap();
+    let func = LIBRARY.get::<PcapCreate>(b"pcap_create\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_snaplen(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetSnaplen>(b"pcap_set_snaplen").unwrap();
+    let func = LIBRARY.get::<PcapSetSnaplen>(b"pcap_set_snaplen\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_promisc(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetPromisc>(b"pcap_set_promisc").unwrap();
+    let func = LIBRARY.get::<PcapSetPromisc>(b"pcap_set_promisc\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_timeout(arg1: *mut pcap_t, arg2: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSetTimeout>(b"pcap_set_timeout").unwrap();
+    let func = LIBRARY.get::<PcapSetTimeout>(b"pcap_set_timeout\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_buffer_size(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetBufferSize>(b"pcap_set_buffer_size")
+        .get::<PcapSetBufferSize>(b"pcap_set_buffer_size\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_activate(arg1: *mut pcap_t) -> c_int {
-    let func = LIBRARY.get::<PcapActivate>(b"pcap_activate").unwrap();
+    let func = LIBRARY.get::<PcapActivate>(b"pcap_activate\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_open_dead(arg1: c_int, arg2: c_int) -> *mut pcap_t {
-    let func = LIBRARY.get::<PcapOpenDead>(b"pcap_open_dead").unwrap();
+    let func = LIBRARY.get::<PcapOpenDead>(b"pcap_open_dead\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_open_offline(arg1: *const c_char, arg2: *mut c_char) -> *mut pcap_t {
     let func = LIBRARY
-        .get::<PcapOpenOffline>(b"pcap_open_offline")
+        .get::<PcapOpenOffline>(b"pcap_open_offline\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_fopen_offline(arg1: *mut FILE, arg2: *mut c_char) -> *mut pcap_t {
     let func = LIBRARY
-        .get::<PcapFopenOffline>(b"pcap_fopen_offline")
+        .get::<PcapFopenOffline>(b"pcap_fopen_offline\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_close(arg1: *mut pcap_t) {
-    let func = LIBRARY.get::<PcapClose>(b"pcap_close").unwrap();
+    let func = LIBRARY.get::<PcapClose>(b"pcap_close\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_next_ex(
@@ -159,33 +159,33 @@ pub unsafe fn pcap_next_ex(
     arg2: *mut *mut pcap_pkthdr,
     arg3: *mut *const c_uchar,
 ) -> c_int {
-    let func = LIBRARY.get::<PcapNextEx>(b"pcap_next_ex").unwrap();
+    let func = LIBRARY.get::<PcapNextEx>(b"pcap_next_ex\0").unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_stats(arg1: *mut pcap_t, arg2: *mut pcap_stat) -> c_int {
-    let func = LIBRARY.get::<PcapStats>(b"pcap_stats").unwrap();
+    let func = LIBRARY.get::<PcapStats>(b"pcap_stats\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setfilter(arg1: *mut pcap_t, arg2: *mut bpf_program) -> c_int {
-    let func = LIBRARY.get::<PcapSetfilter>(b"pcap_setfilter").unwrap();
+    let func = LIBRARY.get::<PcapSetfilter>(b"pcap_setfilter\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setdirection(arg1: *mut pcap_t, arg2: pcap_direction_t) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetdirection>(b"pcap_setdirection")
+        .get::<PcapSetdirection>(b"pcap_setdirection\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_setnonblock(arg1: *mut pcap_t, arg2: c_int, arg3: *mut c_char) -> c_int {
-    let func = LIBRARY.get::<PcapSetnonblock>(b"pcap_setnonblock").unwrap();
+    let func = LIBRARY.get::<PcapSetnonblock>(b"pcap_setnonblock\0").unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_sendpacket(arg1: *mut pcap_t, arg2: *const c_uchar, arg3: c_int) -> c_int {
-    let func = LIBRARY.get::<PcapSendpacket>(b"pcap_sendpacket").unwrap();
+    let func = LIBRARY.get::<PcapSendpacket>(b"pcap_sendpacket\0").unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_geterr(arg1: *mut pcap_t) -> *mut c_char {
-    let func = LIBRARY.get::<PcapGeterr>(b"pcap_geterr").unwrap();
+    let func = LIBRARY.get::<PcapGeterr>(b"pcap_geterr\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_compile(
@@ -195,11 +195,11 @@ pub unsafe fn pcap_compile(
     arg4: c_int,
     arg5: c_uint,
 ) -> c_int {
-    let func = LIBRARY.get::<PcapCompile>(b"pcap_compile").unwrap();
+    let func = LIBRARY.get::<PcapCompile>(b"pcap_compile\0").unwrap();
     func(arg1, arg2, arg3, arg4, arg5)
 }
 pub unsafe fn pcap_freecode(arg1: *mut bpf_program) {
-    let func = LIBRARY.get::<PcapFreecode>(b"pcap_freecode").unwrap();
+    let func = LIBRARY.get::<PcapFreecode>(b"pcap_freecode\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_offline_filter(
@@ -208,97 +208,97 @@ pub unsafe fn pcap_offline_filter(
     arg3: *const c_uchar,
 ) -> c_int {
     let func = LIBRARY
-        .get::<PcapOfflineFilter>(b"pcap_offline_filter")
+        .get::<PcapOfflineFilter>(b"pcap_offline_filter\0")
         .unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_datalink(arg1: *mut pcap_t) -> c_int {
-    let func = LIBRARY.get::<PcapDatalink>(b"pcap_datalink").unwrap();
+    let func = LIBRARY.get::<PcapDatalink>(b"pcap_datalink\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_list_datalinks(arg1: *mut pcap_t, arg2: *mut *mut c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapListDatalinks>(b"pcap_list_datalinks")
+        .get::<PcapListDatalinks>(b"pcap_list_datalinks\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_set_datalink(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetDatalink>(b"pcap_set_datalink")
+        .get::<PcapSetDatalink>(b"pcap_set_datalink\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_free_datalinks(arg1: *mut c_int) {
     let func = LIBRARY
-        .get::<PcapFreeDatalinks>(b"pcap_free_datalinks")
+        .get::<PcapFreeDatalinks>(b"pcap_free_datalinks\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_datalink_name_to_val(arg1: *const c_char) -> c_int {
     let func = LIBRARY
-        .get::<PcapDatalinkNameToVal>(b"pcap_datalink_name_to_val")
+        .get::<PcapDatalinkNameToVal>(b"pcap_datalink_name_to_val\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_datalink_val_to_name(arg1: c_int) -> *const c_char {
     let func = LIBRARY
-        .get::<PcapDatalinkValToName>(b"pcap_datalink_val_to_name")
+        .get::<PcapDatalinkValToName>(b"pcap_datalink_val_to_name\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_datalink_val_to_description(arg1: c_int) -> *const c_char {
     let func = LIBRARY
-        .get::<PcapDatalinkValToDescription>(b"pcap_datalink_val_to_description")
+        .get::<PcapDatalinkValToDescription>(b"pcap_datalink_val_to_description\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_major_version(arg1: *mut pcap_t) -> c_int {
     let func = LIBRARY
-        .get::<PcapMajorVersion>(b"pcap_major_version")
+        .get::<PcapMajorVersion>(b"pcap_major_version\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_minor_version(arg1: *mut pcap_t) -> c_int {
     let func = LIBRARY
-        .get::<PcapMinorVersion>(b"pcap_minor_version")
+        .get::<PcapMinorVersion>(b"pcap_minor_version\0")
         .unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_fileno(arg1: *mut pcap_t) -> c_int {
-    let func = LIBRARY.get::<PcapFileno>(b"pcap_fileno").unwrap();
+    let func = LIBRARY.get::<PcapFileno>(b"pcap_fileno\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_dump_open(arg1: *mut pcap_t, arg2: *const c_char) -> *mut pcap_dumper_t {
-    let func = LIBRARY.get::<PcapDumpOpen>(b"pcap_dump_open").unwrap();
+    let func = LIBRARY.get::<PcapDumpOpen>(b"pcap_dump_open\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_dump_fopen(arg1: *mut pcap_t, fp: *mut FILE) -> *mut pcap_dumper_t {
-    let func = LIBRARY.get::<PcapDumpFopen>(b"pcap_dump_fopen").unwrap();
+    let func = LIBRARY.get::<PcapDumpFopen>(b"pcap_dump_fopen\0").unwrap();
     func(arg1, fp)
 }
 pub unsafe fn pcap_dump_flush(arg1: *mut pcap_dumper_t) -> c_int {
-    let func = LIBRARY.get::<PcapDumpFlush>(b"pcap_dump_flush").unwrap();
+    let func = LIBRARY.get::<PcapDumpFlush>(b"pcap_dump_flush\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_dump_close(arg1: *mut pcap_dumper_t) {
-    let func = LIBRARY.get::<PcapDumpClose>(b"pcap_dump_close").unwrap();
+    let func = LIBRARY.get::<PcapDumpClose>(b"pcap_dump_close\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_dump(arg1: *mut c_uchar, arg2: *const pcap_pkthdr, arg3: *const c_uchar) {
-    let func = LIBRARY.get::<PcapDump>(b"pcap_dump").unwrap();
+    let func = LIBRARY.get::<PcapDump>(b"pcap_dump\0").unwrap();
     func(arg1, arg2, arg3)
 }
 pub unsafe fn pcap_findalldevs(arg1: *mut *mut pcap_if_t, arg2: *mut c_char) -> c_int {
-    let func = LIBRARY.get::<PcapFindalldevs>(b"pcap_findalldevs").unwrap();
+    let func = LIBRARY.get::<PcapFindalldevs>(b"pcap_findalldevs\0").unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_freealldevs(arg1: *mut pcap_if_t) {
-    let func = LIBRARY.get::<PcapFreealldevs>(b"pcap_freealldevs").unwrap();
+    let func = LIBRARY.get::<PcapFreealldevs>(b"pcap_freealldevs\0").unwrap();
     func(arg1)
 }
 pub unsafe fn pcap_get_selectable_fd(arg1: *mut pcap_t) -> c_int {
     let func = LIBRARY
-        .get::<PcapGetSelectableFd>(b"pcap_get_selectable_fd")
+        .get::<PcapGetSelectableFd>(b"pcap_get_selectable_fd\0")
         .unwrap();
     func(arg1)
 }
@@ -306,7 +306,7 @@ pub unsafe fn pcap_get_selectable_fd(arg1: *mut pcap_t) -> c_int {
 #[cfg(libpcap_1_2_1)]
 pub fn pcap_set_tstamp_type(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetTstampType>(b"pcap_set_tstamp_type")
+        .get::<PcapSetTstampType>(b"pcap_set_tstamp_type\0")
         .unwrap();
     func(arg1, arg2)
 }
@@ -318,14 +318,14 @@ pub fn pcap_fopen_offline_with_tstamp_precision(
     arg3: *mut c_char,
 ) -> *mut pcap_t {
     let func = LIBRARY
-        .get::<PcapFopenOfflineWithTstampPrecision>(b"pcap_fopen_offline_with_tstamp_precision")
+        .get::<PcapFopenOfflineWithTstampPrecision>(b"pcap_fopen_offline_with_tstamp_precision\0")
         .unwrap();
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
 pub fn pcap_open_dead_with_tstamp_precision(arg1: c_int, arg2: c_int, arg3: c_uint) -> *mut pcap_t {
     let func = LIBRARY
-        .get::<PcapOpenDeadWithTstampPrecision>(b"pcap_open_dead_with_tstamp_precision")
+        .get::<PcapOpenDeadWithTstampPrecision>(b"pcap_open_dead_with_tstamp_precision\0")
         .unwrap();
     func(arg1, arg2, arg3)
 }
@@ -336,21 +336,21 @@ pub fn pcap_open_offline_with_tstamp_precision(
     arg3: *mut c_char,
 ) -> *mut pcap_t {
     let func = LIBRARY
-        .get::<PcapOpenOfflineWithTstampPrecision>(b"pcap_open_offline_with_tstamp_precision")
+        .get::<PcapOpenOfflineWithTstampPrecision>(b"pcap_open_offline_with_tstamp_precision\0")
         .unwrap();
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
 pub fn pcap_set_immediate_mode(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetImmediateMode>(b"pcap_set_immediate_mode")
+        .get::<PcapSetImmediateMode>(b"pcap_set_immediate_mode\0")
         .unwrap();
     func(arg1, arg2)
 }
 #[cfg(libpcap_1_5_0)]
 pub fn pcap_set_tstamp_precision(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetTstampPrecision>(b"pcap_set_tstamp_precision")
+        .get::<PcapSetTstampPrecision>(b"pcap_set_tstamp_precision\0")
         .unwrap();
     func(arg1, arg2)
 }
@@ -358,30 +358,30 @@ pub fn pcap_set_tstamp_precision(arg1: *mut pcap_t, arg2: c_int) -> c_int {
 #[cfg(libpcap_1_7_2)]
 pub fn pcap_dump_open_append(arg1: *mut pcap_t, arg2: *const c_char) -> *mut pcap_dumper_t {
     let func = LIBRARY
-        .get::<PcapDumpOpenAppend>(b"pcap_dump_open_append")
+        .get::<PcapDumpOpenAppend>(b"pcap_dump_open_append\0")
         .unwrap();
     func(arg1, arg2)
 }
 
 pub unsafe fn pcap_setmintocopy(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
-        .get::<PcapSetmintocopy>(b"pcap_setmintocopy")
+        .get::<PcapSetmintocopy>(b"pcap_setmintocopy\0")
         .unwrap();
     func(arg1, arg2)
 }
 pub unsafe fn pcap_getevent(p: *mut pcap_t) -> HANDLE {
-    let func = LIBRARY.get::<PcapGetEvent>(b"pcap_getevent").unwrap();
+    let func = LIBRARY.get::<PcapGetEvent>(b"pcap_getevent\0").unwrap();
     func(p)
 }
 pub unsafe fn pcap_sendqueue_alloc(memsize: c_uint) -> *mut pcap_send_queue {
     let func = LIBRARY
-        .get::<PcapSendqueueAlloc>(b"pcap_sendqueue_alloc")
+        .get::<PcapSendqueueAlloc>(b"pcap_sendqueue_alloc\0")
         .unwrap();
     func(memsize)
 }
 pub unsafe fn pcap_sendqueue_destroy(queue: *mut pcap_send_queue) {
     let func = LIBRARY
-        .get::<PcapSendqueueDestroy>(b"pcap_sendqueue_destroy")
+        .get::<PcapSendqueueDestroy>(b"pcap_sendqueue_destroy\0")
         .unwrap();
     func(queue)
 }
@@ -391,7 +391,7 @@ pub unsafe fn pcap_sendqueue_queue(
     pkt_data: *const c_uchar,
 ) -> c_int {
     let func = LIBRARY
-        .get::<PcapSendqueueQueue>(b"pcap_sendqueue_queue")
+        .get::<PcapSendqueueQueue>(b"pcap_sendqueue_queue\0")
         .unwrap();
     func(queue, pkt_header, pkt_data)
 }
@@ -401,7 +401,7 @@ pub unsafe fn pcap_sendqueue_transmit(
     sync: c_int,
 ) -> c_uint {
     let func = LIBRARY
-        .get::<PcapSendqueueTransmit>(b"pcap_sendqueue_transmit")
+        .get::<PcapSendqueueTransmit>(b"pcap_sendqueue_transmit\0")
         .unwrap();
     func(p, queue, sync)
 }
