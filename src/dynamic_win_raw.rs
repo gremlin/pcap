@@ -335,7 +335,11 @@ pub unsafe fn pcap_fopen_offline_with_tstamp_precision(
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
-pub unsafe fn pcap_open_dead_with_tstamp_precision(arg1: c_int, arg2: c_int, arg3: c_uint) -> *mut pcap_t {
+pub unsafe fn pcap_open_dead_with_tstamp_precision(
+    arg1: c_int,
+    arg2: c_int,
+    arg3: c_uint,
+) -> *mut pcap_t {
     let func = LIBRARY
         .get::<PcapOpenDeadWithTstampPrecision>(b"pcap_open_dead_with_tstamp_precision\0")
         .unwrap();
