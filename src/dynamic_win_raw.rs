@@ -316,7 +316,7 @@ pub unsafe fn pcap_get_selectable_fd(arg1: *mut pcap_t) -> c_int {
 }
 
 #[cfg(libpcap_1_2_1)]
-pub fn pcap_set_tstamp_type(arg1: *mut pcap_t, arg2: c_int) -> c_int {
+pub unsafe fn pcap_set_tstamp_type(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
         .get::<PcapSetTstampType>(b"pcap_set_tstamp_type\0")
         .unwrap();
@@ -324,7 +324,7 @@ pub fn pcap_set_tstamp_type(arg1: *mut pcap_t, arg2: c_int) -> c_int {
 }
 
 #[cfg(libpcap_1_5_0)]
-pub fn pcap_fopen_offline_with_tstamp_precision(
+pub unsafe fn pcap_fopen_offline_with_tstamp_precision(
     arg1: *mut FILE,
     arg2: c_uint,
     arg3: *mut c_char,
@@ -335,14 +335,18 @@ pub fn pcap_fopen_offline_with_tstamp_precision(
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
-pub fn pcap_open_dead_with_tstamp_precision(arg1: c_int, arg2: c_int, arg3: c_uint) -> *mut pcap_t {
+pub unsafe fn pcap_open_dead_with_tstamp_precision(
+    arg1: c_int,
+    arg2: c_int,
+    arg3: c_uint,
+) -> *mut pcap_t {
     let func = LIBRARY
         .get::<PcapOpenDeadWithTstampPrecision>(b"pcap_open_dead_with_tstamp_precision\0")
         .unwrap();
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
-pub fn pcap_open_offline_with_tstamp_precision(
+pub unsafe fn pcap_open_offline_with_tstamp_precision(
     arg1: *const c_char,
     arg2: c_uint,
     arg3: *mut c_char,
@@ -353,14 +357,14 @@ pub fn pcap_open_offline_with_tstamp_precision(
     func(arg1, arg2, arg3)
 }
 #[cfg(libpcap_1_5_0)]
-pub fn pcap_set_immediate_mode(arg1: *mut pcap_t, arg2: c_int) -> c_int {
+pub unsafe fn pcap_set_immediate_mode(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
         .get::<PcapSetImmediateMode>(b"pcap_set_immediate_mode\0")
         .unwrap();
     func(arg1, arg2)
 }
 #[cfg(libpcap_1_5_0)]
-pub fn pcap_set_tstamp_precision(arg1: *mut pcap_t, arg2: c_int) -> c_int {
+pub unsafe fn pcap_set_tstamp_precision(arg1: *mut pcap_t, arg2: c_int) -> c_int {
     let func = LIBRARY
         .get::<PcapSetTstampPrecision>(b"pcap_set_tstamp_precision\0")
         .unwrap();
@@ -368,7 +372,7 @@ pub fn pcap_set_tstamp_precision(arg1: *mut pcap_t, arg2: c_int) -> c_int {
 }
 
 #[cfg(libpcap_1_7_2)]
-pub fn pcap_dump_open_append(arg1: *mut pcap_t, arg2: *const c_char) -> *mut pcap_dumper_t {
+pub unsafe fn pcap_dump_open_append(arg1: *mut pcap_t, arg2: *const c_char) -> *mut pcap_dumper_t {
     let func = LIBRARY
         .get::<PcapDumpOpenAppend>(b"pcap_dump_open_append\0")
         .unwrap();
